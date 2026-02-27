@@ -1,0 +1,140 @@
+name: Sync Quickstarts to RHOAI Cluster Pool
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'quickstarts/*.yaml'
+      - 'quickstarts/*.yml'
+
+jobs:
+  sync-to-cluster-pool:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout prelude_quickstarts repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Checkout rhoai-cluster-pool repo
+        uses: actions/checkout@v4
+        with:
+          repository: eformat/rhoai-cluster-pool
+          token: ${{ secrets.RHOAI_CLUSTER_POOL_PAT }}
+          path: rhoai-cluster-pool
+          fetch-depth: 0
+
+      - name: Get changed quickstart files
+        id: changed-files
+        run: |
+          # Get list of changed YAML files in quickstarts directory
+          CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD | grep '^quickstarts/.*\.ya*ml$' || true)
+
+          if [ -z "$CHANGED_FILES" ]; then
+            echo "No quickstart files changed"
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          echo "Changed files:"
+          echo "$CHANGED_FILES"
+
+          # Save to output
+          echo "has_changes=true" >> $GITHUB_OUTPUT
+          echo "files<<EOF" >> $GITHUB_OUTPUT
+          echo "$CHANGED_FILES" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Copy quickstarts and update kustomization
+        if: steps.changed-files.outputs.has_changes == 'true'
+        run: |
+          # Set target directory
+          TARGET_DIR="rhoai-cluster-pool/applications/quickstarts/input-prelude"
+
+          # Copy changed files
+          echo "Copying quickstart files..."
+          while IFS= read -r file; do
+            if [ -n "$file" ]; then
+              filename=$(basename "$file")
+              echo "Copying $file to $TARGET_DIR/$filename"
+              cp "$file" "$TARGET_DIR/$filename"
+            fi
+          done <<< "${{ steps.changed-files.outputs.files }}"
+
+          # Update kustomization.yaml
+          cd "$TARGET_DIR"
+
+          # Get all quickstart YAML files (excluding kustomization.yaml)
+          QUICKSTART_FILES=$(ls -1 prelude-*.yaml prelude-*.yml 2>/dev/null | sort || true)
+
+          if [ -z "$QUICKSTART_FILES" ]; then
+            echo "No quickstart files found"
+            exit 1
+          fi
+
+          # Generate new kustomization.yaml
+          cat > kustomization.yaml <<EOF
+          ---
+          resources:
+          EOF
+
+          # Add each file as a resource
+          while IFS= read -r file; do
+            echo "  - $file" >> kustomization.yaml
+          done <<< "$QUICKSTART_FILES"
+
+          echo "Updated kustomization.yaml:"
+          cat kustomization.yaml
+
+      - name: Create Pull Request
+        if: steps.changed-files.outputs.has_changes == 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.RHOAI_CLUSTER_POOL_PAT }}
+          path: rhoai-cluster-pool
+          commit-message: |
+            Add/Update Prelude quickstarts
+
+            Auto-synced from prelude_quickstarts repo
+
+            Changed files:
+            ${{ steps.changed-files.outputs.files }}
+          branch: quickstart-sync-${{ github.run_number }}
+          delete-branch: true
+          title: '[Auto] Sync Prelude Quickstarts'
+          body: |
+            ## 🚀 Automated Quickstart Sync
+
+            This PR was automatically created by the prelude_quickstarts repository.
+
+            ### Changed Files
+            ```
+            ${{ steps.changed-files.outputs.files }}
+            ```
+
+            ### What this does
+            - Syncs new/updated quickstart YAML files from `prelude_quickstarts/quickstarts/`
+            - Updates `applications/quickstarts/input-prelude/kustomization.yaml` to include all quickstarts
+
+            ### Review Checklist
+            - [ ] Quickstart YAML is valid
+            - [ ] Naming follows convention: `prelude-X-topic.yaml`
+            - [ ] displayName follows pattern: `Prelude -X- Title`
+            - [ ] Tasks are clear and actionable
+            - [ ] Prerequisites are listed
+            - [ ] Review/verification steps included
+
+            **Source:** ${{ github.event.head_commit.message }}
+            **Commit:** ${{ github.sha }}
+
+            ---
+            *This PR was created automatically. Review and merge when ready.*
+          labels: |
+            quickstart
+            automated
+            prelude
+          reviewers: |
+            sbowerma
+          assignees: |
+            sbowerma
