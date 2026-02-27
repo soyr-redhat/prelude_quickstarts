@@ -1,0 +1,181 @@
+---
+# Prelude Quickstart Template
+# Copy this file and customize it for your own quickstart
+# Name it: prelude-X-your-topic.yaml (where X is the next number in sequence)
+
+apiVersion: console.openshift.io/v1
+kind: OdhQuickStart
+metadata:
+  name: prelude-X-your-quickstart-name  # CHANGE: Must be unique, lowercase, use dashes
+  namespace: redhat-ods-applications
+  annotations:
+    opendatahub.io/categories: 'Getting started,Agents,Notebook environments'  # CHANGE: Choose relevant categories
+    platform.opendatahub.io/instance.name: default-dashboard
+    internal.config.kubernetes.io/previousNamespaces: default
+    platform.opendatahub.io/version: 3.0.0
+    platform.opendatahub.io/type: OpenShift AI Self-Managed
+  labels:
+    app: rhods-dashboard
+    app.kubernetes.io/part-of: rhods-dashboard
+    app.opendatahub.io/rhods-dashboard: 'true'
+    platform.opendatahub.io/part-of: dashboard
+spec:
+  description: Brief one-line description of what this quickstart teaches  # CHANGE THIS
+  displayName: Prelude -X- Your Quickstart Title  # CHANGE: This shows in the RHOAI Dashboard UI
+  appName: rhoai
+  durationMinutes: 15  # CHANGE: Estimated time to complete (5, 15, 30, 60, 120, etc.)
+
+  # Icon - You can copy this from an existing quickstart or generate your own
+  # To generate: base64 -i your-icon.png | tr -d '\n'
+  icon: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAaQAAAFnCAIAAABmUqp4AAAeCnpUWHRSYXcgcHJvZmlsZSB0eXBlIGV4aWYAAHjarZtpdhw3loX/YxW9BMzDch6mc3oHvfz+LpJUWyr5tO0q0WKmk8EI4A13ACB3/ue/r/sv/rRYvcul9Tpq9fzJI49ovOn+88fe9+Dz+/75KH+9Cz9/7mr7eht5Tbymzw96/byG78+/fuH7NRjvyh9u1NfXD+bPPxj58xr7LzeKn5ekEen9/rrR+LpRip8fhK8b2Gdavo7e/jiFeT6vX7//CQN/nb7l/vOw/+X/G9HbheekGE8KyfM9pvwZQNLf4JLxpvE9pMaFIdX3SeJ7TN9TIiC/i5P/w6jcr1n58e6XrGz7EaOfkpLq5wrHBz8Hs/54/e3nofzy+dcN3QvxH56c1o9y+OnzMMjrL9P5/nvv7u7e85md5UpI69ekvqf43nEhN8np/Vrlq/G38L69r8FXd1TvIuXbLz/5Wjw5kpYbctjBwg3nva6wGGKOJ5KSGOMiUfqsk6IRV/KOPGV9hRtbGmmnTrYW6U18Gn+MJbznjve4FToP3oErY+Bmgd+ITt/+E19/eqN7VfIhKJjbXqwYV1RTMAxlTt+5ioSE+11H5QX4++vXP8prIoPlhbkzQfPzc4tZwldtqY7SS3TiwsLrp9dC2183IEQ8uzCYkMiAryGVUINvMbYQiGMnP8aNOk0TJykIpcTNKGNOqZKcHvVsfqeFd20s8fMxmEUiCs3USM1IRq4ywEb9tNypISup5FJKLa30MorVVHMttdZWBX7WUsuttNpa620066nnXnrtrXfXR7cRRwIcy6ijjT7GMOOhxp2N3zYuMJtxpplnmXW22eeYtiiflVdZdbXV3RrLdtxpgxO77rb7HttOOJTSyaecetrpZxy7lNpNN99y622333HtR9aC+6T1X77+etbCd9biy5QubD+yxq+29n2LIDgpyhkZizmQ8aYMUNBROfM95BydUqec+QGOpRIZZVFydlDGyGA+IZYbfuTu/zL3U95czv9W3uJ35pxS95/InFPq/iRz/5q332TtQfDyyb0MqQ0VVJ9oPy6y2PkPTvrrr+4vXRgblFO7um6EHec4m4FpgqskJn4Hlb22wHLWQ1ZgLbI26zj39Eo64y55Wx4Uwyak5ZRbRs6nrZl8BzRyX72WMLnRFtqT23WbrVEKUallBWOa4YghF9vWauHoubukfVEuaa+lT+47bYuRQ0g5r2InLmTtmF1i7yWVXEIpZZRZVrlVVFNdTbU11dZSa2u1tdZaG2201l5H6x10Ndlksy012mSzzbba6m677bbb7YA9HTr0sMOOOuqo446ZetqZZ5l1ttnnWHSJpZdZdbXV11h1i6232XW33ffYdY+999j7m61/Ze1vsva/svY3WfsbWfuKrJ82fiZrca5mh1uEIw
+
+  # Introduction - Explain what users will learn
+  introduction: |-
+    ### This quick start shows you how to [accomplish something specific].
+
+    **What you'll learn:**
+    - First key concept or skill
+    - Second key concept or skill
+    - Third key concept or skill
+
+    **Why this matters:**
+    - Explain the value or use case
+    - Real-world applications
+
+  # Prerequisites - What users need before starting
+  prerequisites:
+    - Access to the OpenShift cluster
+    - Admin credentials (username and password)
+    - Any specific tools or resources installed
+    - Prior knowledge (e.g., "Completed Prelude -1- Chat with an LLM")
+
+  # Tasks - Step-by-step instructions (can have multiple tasks)
+  tasks:
+    # Task 1
+    - description: |-
+        ### Let's [do the first thing]
+
+        In this task, you will [brief description of what they'll accomplish].
+
+        1. Navigate to the OpenShift Console from the **hamburger menu** in the top right corner
+
+        2. Go to **Home → Projects**
+
+        3. Select or create a project:
+           - Click **Create Project** if needed
+           - Name it: `my-project`
+           - Click **Create**
+
+        4. Verify your project is selected:
+           ```bash
+           oc project my-project
+           ```
+
+        5. Deploy something:
+           - Click **+Add** in the left navigation
+           - Select **Import from Git**
+           - Enter repository URL: `https://github.com/example/repo`
+
+        **Tip:** You can use markdown formatting, code blocks, **bold**, *italic*, and more!
+
+        **Note:** Provide helpful context and warnings where needed.
+
+      title: Task 1 - Create and Configure Your Project
+      review:
+        instructions: |-
+          #### Verify you completed this task:
+
+          - [ ] Did you create the project successfully?
+          - [ ] Can you see it in the Projects list?
+          - [ ] Is the deployment running?
+
+          Check the pod status:
+          ```bash
+          oc get pods -n my-project
+          ```
+
+        failedTaskHelp: This task isn't verified yet. Review the steps and try again. If stuck, check the OpenShift documentation.
+      summary:
+        success: Great! You've successfully created your project and deployed your first application.
+        failed: Something went wrong. Please review the steps and try again.
+
+    # Task 2 - Add more tasks as needed
+    - description: |-
+        ### Now let's [do the second thing]
+
+        In this task, you'll [what they'll accomplish in task 2].
+
+        1. First step for task 2
+
+        2. Second step:
+           - Sub-step A
+           - Sub-step B
+
+        3. Third step with code example:
+           ```yaml
+           apiVersion: v1
+           kind: ConfigMap
+           metadata:
+             name: example-config
+           data:
+             key: value
+           ```
+
+        4. Apply the configuration:
+           ```bash
+           oc apply -f config.yaml
+           ```
+
+      title: Task 2 - Configure Your Application
+      review:
+        instructions: |-
+          #### Did you complete this task?
+
+          - [ ] Configuration applied successfully?
+          - [ ] Application restarted and running?
+
+        failedTaskHelp: This task isn't verified yet. Double-check your YAML syntax and try again.
+      summary:
+        success: Excellent! Your application is now configured.
+        failed: Configuration failed. Review the steps carefully.
+
+    # Task 3 - Optional third task
+    - description: |-
+        ### Finally, let's [do the third thing]
+
+        1. Final steps...
+        2. Test your work...
+        3. Verify everything works...
+
+      title: Task 3 - Test and Validate
+      review:
+        instructions: |-
+          #### Verification:
+
+          - [ ] Tests passed?
+          - [ ] Application accessible?
+
+        failedTaskHelp: Review your configuration and try the steps again.
+      summary:
+        success: Perfect! You've completed all tasks.
+        failed: Try the steps again.
+
+  # Conclusion - Wrap up and next steps
+  conclusion: >-
+    Congratulations! You successfully completed this quickstart.
+
+    **What you learned:**
+    - Skill 1
+    - Skill 2
+    - Skill 3
+
+    **Next steps:**
+    - Try the advanced tutorial
+    - Explore related features
+    - Build something on your own
+
+    Keep going and have fun with OpenShift AI!
+
+  # Optional: Suggest the next quickstart
+  nextQuickStart:
+    - prelude-next-tutorial  # Name of the next suggested quickstart (leave empty [] if none)
