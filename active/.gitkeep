@@ -1,0 +1,3 @@
+# Active quickstarts directory
+# Move your ready-to-deploy quickstarts here
+# GitHub Actions monitors this folder and auto-creates PRs to rhoai-cluster-pool
