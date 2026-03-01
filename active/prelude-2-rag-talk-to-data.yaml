@@ -19,7 +19,7 @@ spec:
   description: Build a private, document-aware AI assistant using RAG. Data never leaves your environment.
   displayName: Prelude -2- Talk to Your Own Data (RAG)
   appName: rhoai
-  durationMinutes: 25
+  durationMinutes: 20
   icon: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAaQAAAFnCAIAAABmUqp4AAAeCnpUWHRSYXcgcHJvZmlsZSB0eXBlIGV4aWYAAHjarZtpdhw3loX/YxW9BMzDch6mc3oHvfz+LpJUWyr5tO0q0WKmk8EI4A13ACB3/ue/r/sv/rRYvcul9Tpq9fzJI49ovOn+88fe9+Dz+/75KH+9Cz9/7mr7eht5Tbymzw96/byG78+/fuH7NRjvyh9u1NfXD+bPPxj58xr7LzeKn5ekEen9/rrR+LpRip8fhK8b2Gdavo7e/jiFeT6vX7//CQN/nb7l/vOw/+X/G9HbheekGE8KyfM9pvwZQNLf4JLxpvE9pMaFIdX3SeJ7TN9TIiC/i5P/w6jcr1n58e6XrGz7EaOfkpLq5wrHBz8Hs/54/e3nofzy+dcN3QvxH56c1o9y+OnzMMjrL9P5/nvv7u7e85md5UpI69ekvqf43nEhN8np/Vrlq/G38L69r8FXd1TvIuXbLz/5Wjw5kpYbctjBwg3nva6wGGKOJ5KSGOMiUfqsk6IRV/KOPGV9hRtbGmmnTrYW6U18Gn+MJbznjve4FToP3oErY+Bmgd+ITt/+E19/eqN7VfIhKJjbXqwYV1RTMAxlTt+5ioSE+11H5QX4++vXP8prIoPlhbkzQfPzc4tZwldtqY7SS3TiwsLrp9dC2183IEQ8uzCYkMiAryGVUINvMbYQiGMnP8aNOk0TJykIpcTNKGNOqZKcHvVsfqeFd20s8fMxmEUiCs3USM1IRq4ywEb9tNypISup5FJKLa30MorVVHMttdZWBX7WUsuttNpa620066nnXnrtrXfXR7cRRwIcy6ijjT7GMOOhxp2N3zYuMJtxpplnmXW22eeYtiiflVdZdbXV3RrLdtxpgxO77rb7HttOOJTSyaecetrpZxy7lNpNN99y622333HtR9aC+6T1X77+etbCd9biy5QubD+yxq+29n2LIDgpyhkZizmQ8aYMUNBROfM95BydUqec+QGOpRIZZVFydlDGyGA+IZYbfuTu/zL3U95czv9W3uJ35pxS95/InFPq/iRz/5q332TtQfDyyb0MqQ0VVJ9oPy6y2PkPTvrrr+4vXRgblFO7um6EHec4m4FpgqskJn4Hlb22wHLWQ1ZgLbI26zj39Eo64y55Wx4Uwyak5ZRbRs6nrZl8BzRyX72WMLnRFtqT23WbrVEKUallB
   introduction: |-
     ### Experience 2: Talk to Your Own Data (RAG)
