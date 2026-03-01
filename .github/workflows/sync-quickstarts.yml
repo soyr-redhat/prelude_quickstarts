@@ -154,7 +154,7 @@ jobs:
             --repo eformat/rhoai-cluster-pool \
             --head soyr-redhat:${{ steps.commit-push.outputs.branch_name }} \
             --title '[Auto] Sync Prelude Quickstarts' \
-            --body '## 🚀 Automated Quickstart Sync
+            --body '## Automated Quickstart Sync
 
           This PR was automatically created by the prelude_quickstarts repository.
 
