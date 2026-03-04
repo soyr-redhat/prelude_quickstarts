@@ -178,13 +178,13 @@ spec:
       title: Task 3 - Discover Available MCP Tools
       review:
         instructions: |-
-          Can you see MCP tools listed and enabled in OpenWebUI?
+          Can you see MCP tools listed in Workspace → Tools?
 
-        failedTaskHelp: If MCP configuration isn't visible, the deployment may have different settings. Try asking a test question in chat like "What is 5 + 3?" - if it calculates correctly, tools are working even without visible config.
+        failedTaskHelp: If you don't see the Tools section, check that you're in the Workspace menu (left sidebar). If tools still aren't visible, they may not be configured yet - proceed to the next task to test if they work anyway.
       summary:
         success: >-
-          Perfect! OpenWebUI is now connected to the MCP agent tools.
-        failed: Configuration not found. Tools might be auto-configured - proceed to next task to test.
+          Excellent! You've discovered the available MCP agent tools.
+        failed: Tools not visible. Proceed to next task to test if they work anyway.
 
     - description: |-
         ### Execute the Trip Planning Task
